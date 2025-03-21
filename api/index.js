@@ -2,9 +2,9 @@ import express from "express";
 
 import cors from "cors";
 import dotenv from "dotenv";
-import errorHnadler from "./middlewares/errorHandler.js";
+import errorHnadler from "../middlewares/errorHandler.js";
 import "express-async-errors";
-import router from "./routes/allRoutes.js";
+import router from "../routes/allRoutes.js";
 import morgan from "morgan";
 import cookieParser from "cookie-parser"
 
