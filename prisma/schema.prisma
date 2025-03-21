@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("URL")
+}
+model User{
+    id Int @id @default(autoincrement())
+    name     String
+    email    String   @unique
+    password String?
+    isAdmin  Boolean  @default(false)
+    otp      Int?      
+    optExires DateTime?
+    order    Order[]
+  cart     Cart? 
+    createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+model Category{
+      id Int      @id @default(autoincrement()) 
+      human Human  @default(MEN)
+      color Color  @default(RED)
+      size  Size    @default(L)
+      image String? 
+      products Product[]
+      createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+model Product{
+   id Int @id @default(autoincrement())
+   name String
+   price Int 
+   description String
+   image String?
+   categoryId Int
+   status  StatusProduct @default(AVAILABLE)
+   category Category @relation(fields:[categoryId],references:[id],onDelete: Cascade)
+   quantity Int
+   orderItems OrderItem[]
+    cartItems CartItem[]
+   createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+model Order{
+    id Int @id @default(autoincrement())
+    userId Int
+ 
+    quantity Int 
+    totalPrice Int 
+    status StatusOrder @default(NEW)
+    user User @relation(fields:[userId],references:[id],onDelete: Cascade)
+    orderItems OrderItem[]
+    payment    Payment[]
+    createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Cart {
+  id       Int         @id @default(autoincrement())
+  userId   Int         @unique
+  user     User        @relation(fields: [userId], references: [id],onDelete:Cascade)
+      
+  cartItems CartItem[]
+}
+
+
+
+model CartItem {
+  id        Int     @id @default(autoincrement())
+  cart      Cart    @relation(fields: [cartId], references: [id],onDelete: Cascade)
+  cartId    Int
+  product   Product @relation(fields: [productId], references: [id],onDelete: Cascade)
+  productId Int
+  quantity  Int     @default(0)
+
+  @@unique([cartId, productId]) 
+}
+model OrderItem {
+    id        Int     @id @default(autoincrement())
+    order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+    orderId   Int
+    product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+    productId Int
+    quantity  Int  
+    price     Int   
+}
+model Payment {
+  id          Int      @id @default(autoincrement())
+  orderId   Int      
+  totalPrice  Int
+  purchasedAt DateTime @default(now())
+
+  order     Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum Human{
+    MEN
+    WOMEN
+    CHILDREN 
+}
+
+enum Size{
+    XS
+    S
+    M
+    L
+    XL
+    XXL 
+}
+enum Color{
+    BLUE
+    RED
+    GREEN
+   
+}
+enum StatusProduct{
+   AVAILABLE
+   UNAVAILABLE
+  ON_REQUES
+   
+}
+enum StatusOrder{
+   SUCCESS
+   NEW
+ 
+   
+}
+
+
+
