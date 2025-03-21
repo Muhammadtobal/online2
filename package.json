@@ -1,11 +1,11 @@
 {
   "name": "online-store",
   "version": "1.0.0",
-  "main": "[[...slug]].js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon [[...slug]].js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
