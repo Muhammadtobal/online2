@@ -24,4 +24,5 @@ const port = process.env.PORT || 4001;
 app.use("/api", router);
 
 app.use(errorHnadler);
-export default app;
+module.exports = app;
+
