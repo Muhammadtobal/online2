@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "index.js",
+      "src": "package.json",
       "use": "@vercel/node"
     }
   ],
@@ -11,5 +11,13 @@
       "src": "/(.*)",
       "dest": "/index.js"
     }
-  ]
+  ],
+  "env": {
+    "NPM_CONFIG_CACHE": "/tmp/.npm"
+  },
+  "build": {
+    "env": {
+      "PRISMA_GENERATE": "true"
+    }
+  }
 }
