@@ -5,10 +5,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prisma:generate": "prisma generate",
-    "build": "npm config set registry https://registry.npmjs.org/ && pnpm run prisma:generate",
-    "dev": "node api/index.js",
-    "start": "nodemon api/index.js"
+    "build": "npx prisma generate && node index.js",
+    "dev": "node index.js",
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
