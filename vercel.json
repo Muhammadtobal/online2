@@ -14,5 +14,10 @@
   ],
   "env": {
     "NPM_CONFIG_CACHE": "/tmp/.npm"
+  },
+  "build": {
+    "env": {
+      "PRISMA_GENERATE": "true"
+    }
   }
 }
