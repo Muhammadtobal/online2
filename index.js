@@ -16,13 +16,17 @@ app.use(cors())
 app.use(cookieParser())
 app.use(morgan("tiny"));
 const port = process.env.PORT || 4001;
-app.listen(port, () => {
-  console.log("connected Db"),
-    console.log(`Server Runnig on ${process.env.PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log("Connected DB");
+    console.log(`Server Running on ${port}`);
+  });
+}
+
 
 app.use("/api", router);
 
 app.use(errorHnadler);
-// export default app
 
+
+export default app;
