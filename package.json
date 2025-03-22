@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-     "build": "prisma generate && echo 'Build completed'",
+     "build": "npx prisma generate",
     "dev": "node api/index.js",
     "start": "nodemon api/index.js"
   },
