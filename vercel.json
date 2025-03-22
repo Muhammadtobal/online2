@@ -1,28 +1,15 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "api/index.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "env": {
-      "URL": "mysql://root@localhost:3306/OnlineStore"  
-    },
-    "build": {
-      "env": {
-        "URL": "mysql://root@localhost:3306/OnlineStore"  
-
-      },
-      "commands": [
-        "npx prisma generate" 
-      ]
-    },
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "/api/index.js"
-      }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.js"
+    }
+  ]
+}
